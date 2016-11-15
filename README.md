@@ -4,11 +4,12 @@ Notice: This project will be somewhat complicated to set up in android studio, e
 
 Ive uploaded it simply as an addition to a personal portfolio.
 
-The xml manifest will need reconfiguring for Google Licenses, Google requires every unique computer to have a unique license for its maps API. You can find detailed instructions about this process online. 
+I suggest use of genymotion and virtualbox as the source of emulation. The emulators will needto be configured so they will connect to the internet. This is a long process better explaind on various websites across the web. Also Genymotion is no longer free for indie development.
 
-This will also require an ideal SDK version of 21.. hasnt been tested on the latest versions.
+You will need to install google play services
 
-I suggest use of genymotion and virtualbox as the source of emulation. The emulators will needto be configured so they will connect to the internet. That is another long process better explaind on various websites across the web.
+The xml manifest will need reconfiguring for Google API keys, Google requires every unique computer to have a unique license for its maps API. You can find detailed instructions about this process online. 
+
 
 ----
 
