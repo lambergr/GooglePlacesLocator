@@ -13,3 +13,5 @@ This will also require an ideal SDK version of 21.. hasnt been tested on the lat
 This app demonstrates use of the Google Maps API, Google Places API, an implementation of parceable, use of memory, sqllite, asynchronous tasks, JSON parsing, as well as numerous Android bells and whistles.
 
 This app was never intended to look pretty.
+
+I suggest a direct pull through to Android Studio
