@@ -1,3 +1,14 @@
 # GooglePlacesLocator
 
-This project will be extremely complicated to set up in android studio. The xml will need configuring for Google Licenses, Google requires every Contact the author for more details,
+Notice: This project will be somewhat complicated to set up in android studio, expect around an hour or two for set up.
+
+Ive uploaded it simply as an addition to a personal portfolio.
+
+The xml will need reconfiguring for Google Licenses, Google requires every unique computer to have a unique license for its maps API. You can find detailed instructions about this process online. 
+
+This will also require an ideal SDK version of 21.. hasnt been tested on the latest versions.
+
+----
+
+This app demonstrates use of the Google Maps API, Google Places API, an implementation of parceable, use of memory, sqllite, asynchronous tasks, and JSON data retrieves.
+
