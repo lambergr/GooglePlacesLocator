@@ -8,6 +8,8 @@ The xml manifest will need reconfiguring for Google Licenses, Google requires ev
 
 This will also require an ideal SDK version of 21.. hasnt been tested on the latest versions.
 
+I suggest use of genymotion and virtualbox as the source of emulation. The emulators will needto be configured so they will connect to the internet.
+
 ----
 
 This app demonstrates use of the Google Maps API, Google Places API, an implementation of parceable, use of memory, sqllite, asynchronous tasks, JSON parsing, as well as numerous Android bells and whistles.
