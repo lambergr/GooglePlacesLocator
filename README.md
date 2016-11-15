@@ -4,7 +4,7 @@ Notice: This project will be somewhat complicated to set up in android studio, e
 
 Ive uploaded it simply as an addition to a personal portfolio.
 
-The xml will need reconfiguring for Google Licenses, Google requires every unique computer to have a unique license for its maps API. You can find detailed instructions about this process online. 
+The xml manifest will need reconfiguring for Google Licenses, Google requires every unique computer to have a unique license for its maps API. You can find detailed instructions about this process online. 
 
 This will also require an ideal SDK version of 21.. hasnt been tested on the latest versions.
 
