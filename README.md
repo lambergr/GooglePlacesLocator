@@ -8,7 +8,7 @@ The xml manifest will need reconfiguring for Google Licenses, Google requires ev
 
 This will also require an ideal SDK version of 21.. hasnt been tested on the latest versions.
 
-I suggest use of genymotion and virtualbox as the source of emulation. The emulators will needto be configured so they will connect to the internet.
+I suggest use of genymotion and virtualbox as the source of emulation. The emulators will needto be configured so they will connect to the internet. That is another long process better explaind on various websites across the web.
 
 ----
 
