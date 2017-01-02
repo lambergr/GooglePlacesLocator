@@ -1,3 +1,5 @@
+//JSONfunctions is a class designed to read and parse JSON data into a format in which we can grab information
+
 package com.example.greg.lambertfinal;
 
 import android.util.Log;
@@ -14,53 +16,73 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-/**
- * Created by Greg on 5/4/2015.
- */
 public class JSONfunctions {
 
     public static JSONObject getJSONfromURL(String url) {
+        
         InputStream is = null;
+            
         String result = "";
+       
         JSONObject jArray = null;
 
 // Download JSON data from URL
+        
         try {
+            
             HttpClient httpclient = new DefaultHttpClient();
+            
             HttpPost httppost = new HttpPost(url);
+            
             HttpResponse response = httpclient.execute(httppost);
+            
             HttpEntity entity = response.getEntity();
+            
             is = entity.getContent();
 
         } catch (Exception e) {
+            
             Log.e("log_tag", "Error in http connection " + e.toString());
+            
         }
 
 // Convert response to string
+        
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
                     is, "iso-8859-1"), 8);
+            
             StringBuilder sb = new StringBuilder();
+            
             String line = null;
+            
             while ((line = reader.readLine()) != null) {
+                
                 sb.append(line + "\n");
-                //Log.e("log:", line.toString());
-
+                
             }
             is.close();
+            
             result = sb.toString();
+            
         } catch (Exception e) {
+            
             Log.e("log_tag", "Error converting result " + e.toString());
+            
         }
 
         try {
 
             jArray = new JSONObject(result);
+            
         } catch (JSONException e) {
+            
             Log.e("log_tag", "Error parsing data " + e.toString());
+            
         }
-
+        
         return jArray;
+        
     }
 
 }
