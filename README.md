@@ -2,9 +2,11 @@
 
 Notice: This project will be somewhat complicated to set up in android studio, expect around an hour or two for set up.
 
+Java src files for this proect can be found here: https://github.com/lambergr/GooglePlacesLocator/tree/master/app/src/main/java/com/example/greg/lambertfinal
+
 Ive uploaded it simply as an addition to a personal portfolio.
 
-I suggest use of genymotion and virtualbox as the source of emulation. The emulators will needto be configured so they will connect to the internet. This is a long process better explaind on various websites across the web. Also Genymotion is no longer free for indie development.
+I suggest use of genymotion and virtualbox as the source of emulation. The emulators will need to be configured so they will connect to the internet. This is a long process better explaind on various websites across the web. Also Genymotion is no longer free for indie development.
 
 You will need to install google play services
 
