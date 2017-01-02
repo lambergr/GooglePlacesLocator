@@ -1,3 +1,5 @@
+//This instance populates a map from a selected favorite location from the favorites page, it will only display a single favorite location
+
 package com.example.greg.lambertfinal;
 
 import android.app.ProgressDialog;
@@ -24,7 +26,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 
-public class GoogleMapFav extends ActionBarActivity {
+public class GoogleMapFav extends ActionBarActivity { //declare needed objects
 
     Double myLat;
 
@@ -38,7 +40,6 @@ public class GoogleMapFav extends ActionBarActivity {
 
     String imageString;
 
-
     LatLng myLatLng;
 
     LatLng placePos;
@@ -49,17 +50,13 @@ public class GoogleMapFav extends ActionBarActivity {
 
     ArrayList<Bitmap> bits = new ArrayList<Bitmap>();
 
-
-
     private com.google.android.gms.maps.GoogleMap theMap;
 
-
-
-
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) { //grab bundled data
+        
         super.onCreate(savedInstanceState);
+        
         setContentView(R.layout.activity_google_map_fav);
 
         final Intent myLocalIntent = getIntent();
@@ -78,62 +75,63 @@ public class GoogleMapFav extends ActionBarActivity {
 
         imageString = myBundle.getString("pic");
 
-
-
         new setUpMarkers().execute();
-
-
 
     }
 
 
-    private class setUpMarkers extends AsyncTask<String, String, String> {
+    private class setUpMarkers extends AsyncTask<String, String, String> { //put image in place of default marker, orient camera correctly
 
         ProgressDialog progressDialog = ProgressDialog.show(GoogleMapFav.this, "Loading", "May Take a Minute");
-
 
         @Override
 
         protected void onPreExecute() {
+            
             super.onPreExecute();
+            
         }
 
         protected String doInBackground(String... arguments) {
 
-
             try {
+                
                 URL url = new URL(imageString);
+                
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                
                 connection.setDoInput(true);
+                
                 connection.connect();
+                
                 InputStream input = connection.getInputStream();
+                
                 myBitMap = BitmapFactory.decodeStream(input);
 
                 bits.add(myBitMap);
 
-
             } catch (IOException e) {
-                // Log exception
+                
             }
-
-
+            
             return ("bye");
         }
 
         protected void onPostExecute(String result) {
+            
             markers(v);
+            
             progressDialog.dismiss();
+            
         }
     }
-
-
-
-
 
     public void markers(View view) {
 
         if (theMap == null) {
+            
             theMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.theMap)).getMap();
+            
         }
 
         myLatLng = new LatLng(myLat, myLng);
@@ -150,34 +148,29 @@ public class GoogleMapFav extends ActionBarActivity {
                 .title(placeName))
                 .setIcon(BitmapDescriptorFactory.fromBitmap(bits.get(0)));
 
-
-
         theMap.animateCamera(CameraUpdateFactory.newLatLngZoom(placePos, 14), 5000, null);
 
 
             }
 
-
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        
         getMenuInflater().inflate(R.menu.menu_google_map_fav, menu);
+        
         return true;
+        
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            
             return true;
+            
         }
 
         return super.onOptionsItemSelected(item);
