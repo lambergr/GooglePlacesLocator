@@ -30,7 +30,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 
-public class GoogleMap extends ActionBarActivity {
+public class GoogleMap extends ActionBarActivity { //Declare needed variables
 
     ArrayList<Places> places = new ArrayList<Places>();
 
@@ -62,25 +62,15 @@ public class GoogleMap extends ActionBarActivity {
 
     ArrayList<Bitmap> bits = new ArrayList<Bitmap>();
 
-
     int xyz = 0;
 
-
-
-
-
-
-
-
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    
+    protected void onCreate(Bundle savedInstanceState) { 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_map);
 
-        //test = (TextView) findViewById(R.id.someText);
-
-        final Intent myLocalIntent = getIntent();
+        final Intent myLocalIntent = getIntent();  //Unbundle information pushed over from main activity
 
         Bundle myBundle = myLocalIntent.getExtras();
 
@@ -90,45 +80,26 @@ public class GoogleMap extends ActionBarActivity {
 
         myLng = myBundle.getDouble("myLng");
 
-
-
-
-
-
-
-
-
-
-
-
         Places place = places.get(0);
-
-       // test.setText(Double.toString(place.getLat()));
 
         new setUpMarkers().execute();
 
     }
 
-
-    private class setUpMarkers extends AsyncTask<String, String, String> {
+    private class setUpMarkers extends AsyncTask<String, String, String> {// load the Google map
 
         ProgressDialog progressDialog = ProgressDialog.show(GoogleMap.this, "Loading", "May Take a Minute");
-       // ArrayList<Bitmap> bits = new ArrayList<Bitmap>();
-
-
-        //ArrayList<Bitmap> bits = new ArrayList<Bitmap>();
-
-
 
         @Override
 
         protected void onPreExecute(){
+            
             super.onPreExecute();
+            
         }
 
-        protected String doInBackground(String... arguments){
-
-//
+        protected String doInBackground(String... arguments){ // render the image to put in place of the defualt marker
+            
             for(int z = 0; z < places.size(); z++) {
 
                 Places place2 = places.get(z);
@@ -137,16 +108,20 @@ public class GoogleMap extends ActionBarActivity {
 
 
                 try {
+                    
                     URL url = new URL(imageString);
+                    
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    
                     connection.setDoInput(true);
+                    
                     connection.connect();
+                    
                     InputStream input = connection.getInputStream();
+                    
                     myBitMap = BitmapFactory.decodeStream(input);
 
                     bits.add(myBitMap);
-
-
 
                 } catch (IOException e) {
                     // Log exception
@@ -154,76 +129,46 @@ public class GoogleMap extends ActionBarActivity {
 
             }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             return("bye");
         }
 
-        protected void onPostExecute(String result){
+        protected void onPostExecute(String result){ 
+            
             markers(v);
+            
             progressDialog.dismiss();
+            
         }
 
 
     }
 
-
-    public void markers(View view) {
+    public void markers(View view) { //add markers to the map, orient camera
 
         if (theMap == null) {
+            
             theMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.theMap2)).getMap();
+            
         }
 
         myLatLng = new LatLng(myLat, myLng);
-
-
 
         myMarker = theMap.addMarker(new MarkerOptions()
                 .position(myLatLng)
                 .title("Your Location")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
 
-
         theMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myLatLng, 14), 500, null);
 
         for (int i = 0; i < places.size(); i++) {
+            
             Places place = places.get(i);
 
             Double placeLat = place.getLat();
+            
             Double placeLng = place.getLng();
 
             imageString = place.getIconUrl();
-
-            //Toast.makeText(getApplicationContext(), Integer.toString(bits.size()), Toast.LENGTH_LONG).show();
-
-
-
-
-            //new DownloadJSONImage().execute();
-
-         //  Toast.makeText(getApplicationContext(), Integer.toString(bits.size()), Toast.LENGTH_LONG).show();
-
-
-
-
-
-
-
-
-            // test.setText(Double.toString(placeLng));
-
 
             if (placeLat != null || placeLng != null || placePos != null) {
 
@@ -238,85 +183,24 @@ public class GoogleMap extends ActionBarActivity {
         }
     }
 
-
-//    private class DownloadJSONImage extends AsyncTask<Void, Void, Void> {
-//
-//        @Override
-//        protected Void doInBackground(Void... params) {
-//
-//            try {
-//                URL url = new URL(imageString);
-//                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//                connection.setDoInput(true);
-//                connection.connect();
-//                InputStream input = connection.getInputStream();
-//                myBitMap = BitmapFactory.decodeStream(input);
-//
-//            } catch (IOException e) {
-//                // Log exception
-//                return null;
-//            }
-//
-//            return null;
-//        }
-//
-//
-//        @Override
-//        protected void onPostExecute(Void args) {
-//
-//            Toast.makeText(getApplicationContext(), myBitMap.toString(), Toast.LENGTH_LONG).show();
-//
-//
-//
-//
-//            // imagePic.setImageBitmap(myBitMap);
-//            //progressLayout.setVisibility(View.INVISIBLE);
-//
-//
-//        }
-//    }
-
-
-
-
-
-
-
-
-
-
-            //placePos = new LatLng(placeLat, placeLng);
-
-           // placePos = new LatLng(place.getLat(), place.getLng());
-
-
-
-
-
-
-
-
-
-   // }
-
-
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+    public boolean onCreateOptionsMenu(Menu menu) { // Inflate the menu; this adds items to the action bar if it is present.
+        
         getMenuInflater().inflate(R.menu.menu_google_map, menu);
+        
         return true;
+        
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+    
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            
             return true;
+            
         }
 
         return super.onOptionsItemSelected(item);
