@@ -174,5 +174,6 @@ public class GoogleMapFav extends ActionBarActivity { //declare needed objects
         }
 
         return super.onOptionsItemSelected(item);
+    
     }
 }
