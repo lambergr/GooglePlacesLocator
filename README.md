@@ -2,7 +2,7 @@
 
 Notice: This project will be somewhat complicated to set up in android studio, expect around an hour or two for set up.
 
-Java src files for this proect can be found here: https://github.com/lambergr/GooglePlacesLocator/tree/master/app/src/main/java/com/example/greg/lambertfinal
+Java src files for this project can be found here: https://github.com/lambergr/GooglePlacesLocator/tree/master/app/src/main/java/com/example/greg/lambertfinal
 
 Ive uploaded it simply as an addition to a personal portfolio.
 
