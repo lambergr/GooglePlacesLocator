@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class favorites extends ActionBarActivity { //Declare objects necessary
+public class favorites extends ActionBarActivity { //Declare objects necessary for this class
 
     SQLiteDatabase db;
     
