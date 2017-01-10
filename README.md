@@ -4,6 +4,9 @@ Notice: This project will be somewhat complicated to set up in android studio, e
 
 Java src files for this project can be found here: https://github.com/lambergr/GooglePlacesLocator/tree/master/app/src/main/java/com/example/greg/lambertfinal
 
+Manifest file to place your Google API Auth Key:
+https://github.com/lambergr/GooglePlacesLocator/blob/master/app/src/main/AndroidManifest.xml
+
 Ive uploaded it simply as an addition to a personal portfolio.
 
 I suggest use of genymotion and virtualbox as the source of emulation. The emulators will need to be configured so they will connect to the internet. This is a long process better explaind on various websites across the web. Also Genymotion is no longer free for indie development.
