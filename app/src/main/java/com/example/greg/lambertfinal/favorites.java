@@ -23,10 +23,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class favorites extends ActionBarActivity {
+public class favorites extends ActionBarActivity { //Declare objects necessary
 
     SQLiteDatabase db;
+    
     ArrayAdapter<String> ad;
+    
     List<String> nameList;
 
     ListView nameView;
@@ -43,10 +45,14 @@ public class favorites extends ActionBarActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) { //grab passed on parceable objects from previous intent
+        
         super.onCreate(savedInstanceState);
+        
         setContentView(R.layout.activity_favorites);
+        
         nameView = (ListView) findViewById(R.id.nameList);
+        
         test = (TextView) findViewById(R.id.testText);
 
         File storagePath = getApplication().getFilesDir();
@@ -54,7 +60,6 @@ public class favorites extends ActionBarActivity {
         String myDbPath = storagePath + "/" + "favPlaces";
 
         nameList = new ArrayList<String>();
-
 
         final Intent myLocalIntent = getIntent();
 
@@ -65,85 +70,94 @@ public class favorites extends ActionBarActivity {
         myLng = myBundle.getDouble("myLng");
 
 
-        try {
+        try { //start database
 
             db = SQLiteDatabase.openDatabase(myDbPath, null, SQLiteDatabase.CREATE_IF_NECESSARY);
 
-
             int i = 1;
-            Cursor c = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name != 'android_metadata' AND name != 'sqlite_sequence'", null);
+            
+            Cursor c = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name != 'android_metadata' AND name != 'sqlite_sequence'", null); //this query grabs data from the name tabl 
 
-            c.moveToFirst();
-            while (!c.isAfterLast()) {
-                nameList.add(c.getString(c.getColumnIndex("name")));
-                c.moveToNext();
-                i++;
+            c.moveToFirst(); //put cursor at 1st element
+            
+            while (!c.isAfterLast()) {//keep going until the cursor is not after the last element
+                
+                nameList.add(c.getString(c.getColumnIndex("name"))); //add names while the cursor is pointed to them
+                
+                c.moveToNext(); //move cursor downn
+                
+                i++; //keep track of number of items in name array
+                
             }
+            
             c.close();
-            //db.close();
-
-
+            
+            
         } catch (SQLiteException e) {
-
-
+            
         }
 
-        ad = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked, nameList);
-
-
+        ad = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked, nameList); //populate a clickable array list with the names we took from the database
+        
         nameView.setAdapter(ad);
+        
         nameView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        
         nameView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            
             public void onItemClick(AdapterView<?> l, View v, int position, long id) {
+                
                 bigPosition = position;
-
-
+                
             }
+            
         });
-
-
+        
     }
 
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-
-
+        
         super.onCreateContextMenu(menu, v, menuInfo);
+        
         populateMenu(menu);
+        
     }
-
 
     @Override
+    
     public boolean onCreateOptionsMenu(Menu menu) {
+        
         // Inflate the menu; this adds items to the action bar if it is present.
+        
         populateMenu(menu);
+        
         return super.onCreateOptionsMenu(menu);
-
-
+        
     }
 
-    public void populateMenu(Menu menu) {
+    public void populateMenu(Menu menu) { //populate menu bar, set ID's
+        
         int groupId = 0;
+        
         int order = 0;
 
         menu.add(groupId, 1, ++order, "Go to Selected in Maps");
+        
         menu.add(groupId, 2, ++order, "Delete From Favorites");
-
-
+        
     }
-
-
+    
     @Override
+    
     public boolean onOptionsItemSelected(MenuItem item) {
+        
         return applyMenuOption((item));
+        
     }
-
-
-    public boolean applyMenuOption(MenuItem item) {
+    
+    public boolean applyMenuOption(MenuItem item) { //what happens when we GO to Selected In Maps
+        
         int itemid = item.getItemId();
-
-
-
-
 
         if (itemid == 1) {
 
@@ -152,43 +166,39 @@ public class favorites extends ActionBarActivity {
                 Toast.makeText(getApplicationContext(), "There are no Favorites", Toast.LENGTH_SHORT).show();
 
 
-            } else {
-
+            } else { //store clicked favorite into String name
 
                 ArrayList<String> tester = new ArrayList<String>();
 
                 String name = (String) nameView.getAdapter().getItem(bigPosition);
 
-
-                try {
+                try { //grab information from SQL database from table devoted to favorited item
 
                     int i = 1;
+                    
                     Cursor c = db.rawQuery("SELECT * FROM " + name, null);
+                    
                     c.moveToFirst();
 
                     tester.add(c.getString(c.getColumnIndex("LAT")));
+                    
                     c.moveToFirst();
+                    
                     tester.add(c.getString(c.getColumnIndex("LNG")));
+                    
                     c.moveToFirst();
+                    
                     tester.add(c.getString(c.getColumnIndex("NAME")));
+                    
                     c.moveToFirst();
+                    
                     tester.add(c.getString(c.getColumnIndex("PIC")));
 
-
-
-
-
                     c.close();
-                    //db.close();
-
-
+          
                 } catch (SQLiteException e) {
 
-
-                }
-
-
-                //test.setText(tester.get(1));
+                } //put information into related objects, bundle everything and send it to favorite maps
 
                 Double placeLat = Double.parseDouble(tester.get(0));
 
@@ -202,76 +212,71 @@ public class favorites extends ActionBarActivity {
 
                 Bundle myDataBundle = new Bundle();
 
-
                 myDataBundle.putDouble("placeLat", placeLat);
+                
                 myDataBundle.putDouble("placeLng", placeLng);
 
                 myDataBundle.putDouble("myLat", myLat);
+                
                 myDataBundle.putDouble("myLng", myLng);
 
                 myDataBundle.putString("name", theName);
 
                 myDataBundle.putString("pic", thePic);
 
-
-
                 abstractList.putExtras(myDataBundle);
 
-
                 startActivityForResult(abstractList, 103);
-
 
             }
         }
 
-        if(itemid == 2){
-
-
+        if(itemid == 2){ // deleting a favorite item
 
             if (nameList.isEmpty()) {
+                
                 Toast.makeText(getApplicationContext(), "You are attempting to delete nothing", Toast.LENGTH_SHORT).show();
+                
             } else if (bigPosition == -1 || bigPosition == nameList.size()) {
+                
                 Toast.makeText(getApplicationContext(), "Select an item", Toast.LENGTH_SHORT).show();
-            } else {
+                
+            } else { //grab selected item, delete it from the arraylist
 
                 String name = (String) nameView.getAdapter().getItem(bigPosition);
-
-
-                //Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+              
                 nameList.remove(nameList.get(bigPosition));
+                
                 nameView.setAdapter(ad);
-               // enterText.setText("");
-                try {
+            
+                try { // remove favorited item from database
 
                     db.execSQL("drop table " + name);
-
 
                 } catch (SQLiteException e) {
 
                     Toast.makeText(getApplicationContext(), "Delete Aborted", Toast.LENGTH_SHORT).show();
 
-                }
+                } 
+                
                 Toast.makeText(getApplicationContext(), "Poof! Item " + (bigPosition + 1) + " is gone!", Toast.LENGTH_SHORT).show();
-                while (bigPosition < nameList.size()) {
+                
+                while (bigPosition < nameList.size()) { 
+                    
                     nameList.set(bigPosition, nameList.get(bigPosition));
+                    
                     bigPosition++;
-
-
+                    
                 }
+                
                 bigPosition = nameList.size();
-
-
+                
             }
-
-
-
-
-
+            
         }
 
         return true;
-
-
+        
     }
-
+    
 }
