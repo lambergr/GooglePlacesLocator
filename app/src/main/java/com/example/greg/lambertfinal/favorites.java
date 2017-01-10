@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class favorites extends ActionBarActivity { //Declare objects necessary for this class
+public class favorites extends ActionBarActivity { // Declare objects necessary for this class
 
     SQLiteDatabase db;
     
@@ -45,7 +45,7 @@ public class favorites extends ActionBarActivity { //Declare objects necessary f
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) { //grab passed on parceable objects from previous intent
+    protected void onCreate(Bundle savedInstanceState) { // Grab passed on parceable objects from previous intent
         
         super.onCreate(savedInstanceState);
         
@@ -78,15 +78,15 @@ public class favorites extends ActionBarActivity { //Declare objects necessary f
             
             Cursor c = db.rawQuery("SELECT name FROM sqlite_master WHERE type='table' AND name != 'android_metadata' AND name != 'sqlite_sequence'", null); //this query grabs data from the name tabl 
 
-            c.moveToFirst(); //put cursor at 1st element
+            c.moveToFirst(); // Put cursor at 1st element
             
-            while (!c.isAfterLast()) {//keep going until the cursor is not after the last element
+            while (!c.isAfterLast()) {// Keep going until the cursor is not after the last element
                 
-                nameList.add(c.getString(c.getColumnIndex("name"))); //add names while the cursor is pointed to them
+                nameList.add(c.getString(c.getColumnIndex("name"))); // Add names while the cursor is pointed to them
                 
-                c.moveToNext(); //move cursor downn
+                c.moveToNext(); // Move cursor downn
                 
-                i++; //keep track of number of items in name array
+                i++; // Keep track of number of items in name array
                 
             }
             
@@ -97,7 +97,7 @@ public class favorites extends ActionBarActivity { //Declare objects necessary f
             
         }
 
-        ad = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked, nameList); //populate a clickable array list with the names we took from the database
+        ad = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked, nameList); // Populate a clickable array list with the names we took from the database
         
         nameView.setAdapter(ad);
         
@@ -135,7 +135,7 @@ public class favorites extends ActionBarActivity { //Declare objects necessary f
         
     }
 
-    public void populateMenu(Menu menu) { //populate menu bar, set ID's
+    public void populateMenu(Menu menu) { //Populate menu bar, set ID's
         
         int groupId = 0;
         
@@ -155,7 +155,7 @@ public class favorites extends ActionBarActivity { //Declare objects necessary f
         
     }
     
-    public boolean applyMenuOption(MenuItem item) { //what happens when we GO to Selected In Maps
+    public boolean applyMenuOption(MenuItem item) { // What happens when we GO to Selected In Maps
         
         int itemid = item.getItemId();
 
@@ -166,13 +166,13 @@ public class favorites extends ActionBarActivity { //Declare objects necessary f
                 Toast.makeText(getApplicationContext(), "There are no Favorites", Toast.LENGTH_SHORT).show();
 
 
-            } else { //store clicked favorite into String name
+            } else { // Store clicked favorite into String name
 
                 ArrayList<String> tester = new ArrayList<String>();
 
                 String name = (String) nameView.getAdapter().getItem(bigPosition);
 
-                try { //grab information from SQL database from table devoted to favorited item
+                try { // Grab information from SQL database from table devoted to favorited item
 
                     int i = 1;
                     
@@ -198,7 +198,7 @@ public class favorites extends ActionBarActivity { //Declare objects necessary f
           
                 } catch (SQLiteException e) {
 
-                } //put information into related objects, bundle everything and send it to favorite maps
+                } // Put information into related objects, bundle everything and send it to favorite maps
 
                 Double placeLat = Double.parseDouble(tester.get(0));
 
@@ -231,7 +231,7 @@ public class favorites extends ActionBarActivity { //Declare objects necessary f
             }
         }
 
-        if(itemid == 2){ // deleting a favorite item
+        if(itemid == 2){ // Deleting a favorite item
 
             if (nameList.isEmpty()) {
                 
@@ -241,7 +241,7 @@ public class favorites extends ActionBarActivity { //Declare objects necessary f
                 
                 Toast.makeText(getApplicationContext(), "Select an item", Toast.LENGTH_SHORT).show();
                 
-            } else { //grab selected item, delete it from the arraylist
+            } else { // Grab selected item, delete it from the arraylist
 
                 String name = (String) nameView.getAdapter().getItem(bigPosition);
               
@@ -249,7 +249,7 @@ public class favorites extends ActionBarActivity { //Declare objects necessary f
                 
                 nameView.setAdapter(ad);
             
-                try { // remove favorited item from database
+                try { // Remove favorited item from database
 
                     db.execSQL("drop table " + name);
 
@@ -261,7 +261,7 @@ public class favorites extends ActionBarActivity { //Declare objects necessary f
                 
                 Toast.makeText(getApplicationContext(), "Poof! Item " + (bigPosition + 1) + " is gone!", Toast.LENGTH_SHORT).show();
                 
-                while (bigPosition < nameList.size()) { 
+                while (bigPosition < nameList.size()) { // reset item click locator
                     
                     nameList.set(bigPosition, nameList.get(bigPosition));
                     
