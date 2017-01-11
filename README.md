@@ -1,5 +1,7 @@
 # GooglePlacesLocator
 
+This app will list all registered google place locations within 500 meters of the phone. It can also display these locations on a google map. This app also features a database which stores locations which have been favorited. These favorited locations can also be seen on a google map at the click of a menu button. 
+
 Notice: This project will be somewhat complicated to set up in android studio, expect around an hour or two for set up.
 
 Java src files for this project can be found here: https://github.com/lambergr/GooglePlacesLocator/tree/master/app/src/main/java/com/example/greg/lambertfinal
