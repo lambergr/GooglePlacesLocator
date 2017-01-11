@@ -22,7 +22,7 @@ The xml manifest will need reconfiguring for Google API keys, Google requires ev
 
 # Backend Functionalities
 
-This app demonstrates use of the Google Maps API, Google Places API, an implementation of parceable, use of memory, sqllite, asynchronous tasks, JSON parsing, as well as numerous Android bells and whistles.
+This app demonstrates use of the Google Maps API, Google Places API, an implementation of parceable, use of memory, sqllite, asynchronous tasks, JSON parsing, and bitmap image parsing.
 
 This app was never intended to look pretty.
 
