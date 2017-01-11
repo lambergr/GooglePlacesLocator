@@ -1,6 +1,6 @@
 # GooglePlacesLocator
 
-This app will list all registered google place locations within 500 meters of the phone. It can display these locations on a google map. This app also features a database which can store locations favorited by the user. These favorited locations can be seen on a google map at the click of a menu button. 
+This app will list all registered google place locations within 500 meters of the phone. The user may also select certain types of places to display. These locations can be displayed on a google map. This app also features a database which can store locations favorited by the user. These favorited locations can be seen on a google map at the click of a menu button. 
 
 Notice: This project will be somewhat complicated to set up in android studio, expect around an hour or two for set up.
 
