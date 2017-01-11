@@ -24,4 +24,3 @@ This app demonstrates use of the Google Maps API, Google Places API, an implemen
 
 This app was never intended to look pretty.
 
-I suggest a direct pull through to Android Studio.
