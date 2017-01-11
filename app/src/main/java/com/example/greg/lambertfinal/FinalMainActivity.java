@@ -125,7 +125,7 @@ public class FinalMainActivity extends ActionBarActivity implements LocationList
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 if(placeSpin.getSelectedItem() == "any"){
 
-                    placesSearchStr = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Double.toString(lat2) + "," + Double.toString(lng2) + "&radius=500&key=AIzaSyDtafYuCYHM0TqKhhdBnphl3xQe3a8488I";
+                    placesSearchStr = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Double.toString(lat2) + "," + Double.toString(lng2) + "&radius=500&key=AIzaSyDtafYuCYHM0TqKhhdBnphl3xQe3a8488I"; //grab all locations within 500 meters
 
                     new DownloadJSON().execute();
 
@@ -133,7 +133,7 @@ public class FinalMainActivity extends ActionBarActivity implements LocationList
 
                 else{
                     
-                    placesSearchStr = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Double.toString(lat2) + "," + Double.toString(lng2) + "&types=" +placeSpin.getSelectedItem()+  "&radius=500&key=AIzaSyDtafYuCYHM0TqKhhdBnphl3xQe3a8488I";
+                    placesSearchStr = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + Double.toString(lat2) + "," + Double.toString(lng2) + "&types=" +placeSpin.getSelectedItem()+  "&radius=500&key=AIzaSyDtafYuCYHM0TqKhhdBnphl3xQe3a8488I"; //grab selected location types within 500 meters
                     
                     new DownloadJSON().execute();
 
